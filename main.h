@@ -105,7 +105,7 @@ void free_rvar_list(r_var **head);
 /* aux_str functions */
 char *_strcat(char *dest, const char *src);
 char *_strcpy(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
+int _strcmp(char *str1, char *str2);
 char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 
@@ -117,12 +117,18 @@ char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 /* aux_str2.c */
 char *_strdup(const char *s);
 int _strlen(const char *s);
-int cmp_chars(char str[], const char *delim);
-char *_strtok(char str[], const char *delim);
-int _isdigit(const char *s);
-
-/* aux_str3.c */
+char *_strncat(char *dest, char *src, int n);
+int _isdigit(int c);
 void rev_string(char *s);
+
+/* aux_str3.c*/
+int token_length(char *str, char *delim);
+int token_count(char *str, char *delim);
+char **_strtok(char *line, char *delim);
+
+/*int cmp_chars(char str[], const char *delim);*/
+/*char *_strtok(char str[], const char *delim);*/
+/*int _isdigit(const char *s);*/
 
 /* check_syntax_error.c */
 int repeated_char(char *input, int i);
