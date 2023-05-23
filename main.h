@@ -1,6 +1,13 @@
 #ifndef _MAIN_
 #define _MAIN_
 
+/*
+ * File:main.h
+ * Auth: Rwikwiza Archange
+ * 	 Fridah Muthoni
+ *
+ */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -49,7 +56,8 @@ typedef struct data
  */
 typedef struct sep_list_s
 {
-	char separator;
+	char *name;
+	char *value;
 	struct sep_list_s *next;
 } sep_list;
 
@@ -61,7 +69,7 @@ typedef struct sep_list_s
  */
 typedef struct line_list_s
 {
-	char *line;
+	char *dir;
 	struct line_list_s *next;
 } line_list;
 
@@ -93,10 +101,10 @@ typedef struct builtin_s
 } builtin_t;
 
 /* aux_lists.c */
-sep_list *add_sep_node_end(sep_list **head, char sep);
-void free_sep_list(sep_list **head);
-line_list *add_line_node_end(line_list **head, char *line);
-void free_line_list(line_list **head);
+void free_line_list(line_list *head);
+sep_list *add_sep_node_end(sep_list **head, char *name, char *value);
+void free_sep_list(sep_list *head);
+line_list *add_line_node_end(line_list **head, char *dir);
 
 /* aux_lists2.c */
 r_var *add_rvar_node(r_var **head, int lvar, char *var, int lval);
@@ -125,10 +133,6 @@ void rev_string(char *s);
 int token_length(char *str, char *delim);
 int token_count(char *str, char *delim);
 char **_strtok(char *line, char *delim);
-
-/*int cmp_chars(char str[], const char *delim);*/
-/*char *_strtok(char str[], const char *delim);*/
-/*int _isdigit(const char *s);*/
 
 /* check_syntax_error.c */
 int repeated_char(char *input, int i);
