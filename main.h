@@ -4,7 +4,7 @@
 /*
  * File:main.h
  * Auth: Rwikwiza Archange
- * 	 Fridah Muthoni
+ * Fridah Muthoni
  *
  */
 
@@ -123,9 +123,9 @@ char *_strchr(char *s, char c);
 int _strspn(char *s, char *accept);
 
 /* aux_mem.c */
-void copy_memory(void *dest, const void *src, unsigned int size);
-void *reallocate_memory(void *ptr, unsigned int old_size, unsigned int new_size);
-char **reallocate_double_pointer(char **ptr, unsigned int old_size, unsigned int new_size);
+void _memcpy(void *newptr, const void *ptr, unsigned int size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 
 /* aux_str2.c */
 char *_strdup(const char *s);
@@ -216,21 +216,12 @@ char *error_1(char **args);
 char *error_exit(char **args);
 char *error_cd(char **args);
 char *error_syntax(char **args);
-/*char *strcat_cd(data_shell *, char *, char *, char *);
-char *error_get_cd(data_shell *datash);
-char *error_not_found(data_shell *datash);
-char *error_exit_shell(data_shell *datash);
-*/
+
 
 /* aux_error2.c */
 char *error_path_126(char **args);
 char *error_path_127(char **args);
-/*char *error_get_alias(char **args);
-char *error_env(data_shell *datash);
-char *error_syntax(char **args);
-char *error_permission(char **args);
-char *error_path_126(data_shell *datash);
-*/
+
 
 /*aux_error3.c*/
 int num_len(int num);
