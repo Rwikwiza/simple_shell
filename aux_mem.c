@@ -10,7 +10,7 @@
  *
  * Return: No return value.
  */
-void copy_memory(void *dest, const void *src, unsigned int size)
+void _memcpy(void *newptr, const void *ptr, unsigned int size)
 {
 	char *char_dest = (char *)dest;
 	const char *char_src = (const char *)src;
@@ -30,7 +30,7 @@ void copy_memory(void *dest, const void *src, unsigned int size)
  *         If new_size == old_size, returns ptr without changes.
  *         If malloc fails or invalid parameters are provided, returns NULL.
  */
-void *reallocate_memory(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	void *new_ptr;
 
@@ -66,7 +66,7 @@ void *reallocate_memory(void *ptr, unsigned int old_size, unsigned int new_size)
  *         If new_size == old_size, returns ptr without changes.
  *         If malloc fails or invalid parameters are provided, returns NULL.
  */
-char **reallocate_double_pointer(char **ptr, unsigned int old_size, unsigned int new_size)
+char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size)
 {
 	char **new_ptr;
 	unsigned int i;
