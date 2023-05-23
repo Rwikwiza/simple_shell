@@ -26,6 +26,11 @@
 /* Points to an array of pointers to strings called the "environment" */
 extern char **environ;
 
+/* Global program name */
+char *name;
+
+/* Global history counter */
+int hist;
 
 /**
  * struct data - struct that contains all relevant data on runtime
@@ -206,17 +211,31 @@ char *aux_itoa(int n);
 int _atoi(char *s);
 
 /* aux_error1.c */
-char *strcat_cd(data_shell *, char *, char *, char *);
+char *error_env(char **args);
+char *error_1(char **args);
+char *error_exit(char **args);
+char *error_cd(char **args);
+char *error_syntax(char **args);
+/*char *strcat_cd(data_shell *, char *, char *, char *);
 char *error_get_cd(data_shell *datash);
 char *error_not_found(data_shell *datash);
 char *error_exit_shell(data_shell *datash);
+*/
 
 /* aux_error2.c */
-char *error_get_alias(char **args);
+char *error_path_126(char **args);
+char *error_path_127(char **args);
+/*char *error_get_alias(char **args);
 char *error_env(data_shell *datash);
 char *error_syntax(char **args);
 char *error_permission(char **args);
 char *error_path_126(data_shell *datash);
+*/
+
+/*aux_error3.c*/
+int num_len(int num);
+char *_itoa(int num);
+int create_error(char **args, int err);
 
 
 /* get_error.c */
@@ -226,16 +245,17 @@ int get_error(data_shell *datash, int eval);
 void get_sigint(int sig);
 
 /* aux_help.c */
+void aux_help_general(void);
+void aux_help_alias(void);
+void aux_help_cd(void);
+void aux_help_exit(void);
+void aux_help(void);
+
+/* aux_help2.c */
 void aux_help_env(void);
 void aux_help_setenv(void);
 void aux_help_unsetenv(void);
-void aux_help_general(void);
-void aux_help_exit(void);
-
-/* aux_help2.c */
-void aux_help(void);
-void aux_help_alias(void);
-void aux_help_cd(void);
+void aux_help_history(void);
 
 /* get_help.c */
 int get_help(data_shell *datash);
