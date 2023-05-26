@@ -260,4 +260,7 @@ void addSeparatorsAndLines(separatorList **separatorListHead,
 		lineList **lineListHead, char *inputString);
 char *swapChars(char *inputString, int swapType);
 
+/*help.c*/
+int get_help(data_shell *datash);
+
 #endif
