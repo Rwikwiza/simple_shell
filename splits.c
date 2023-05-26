@@ -1,11 +1,11 @@
 #include "main.h"
 
-int splitCommands(dataShell *dataShell, char *inputString);
+int splitCommands(data_shell *dataShell, char *inputString);
 char **tokenizeString(char *inputString);
-void goToNext(separatorList **separatorList,
-		lineList **lineList, dataShell *dataShell);
-void addSeparatorsAndLines(separatorList **separatorListHead,
-		lineList **lineListHead, char *inputString);
+void goToNext(sep_list **separatorList,
+		line_list **lineList, data_shell *dataShell);
+void addSeparatorsAndLines(sep_list **separatorListHead,
+		line_list **lineListHead, char *inputString);
 char *swapChars(char *inputString, int swapType);
 
 /**
@@ -59,8 +59,8 @@ char *swapChars(char *inputString, int swapType)
  * @inputString: input string
  * Return: no return
  */
-void addSeparatorsAndLines(separatorList **separatorListHead,
-		lineList **lineListHead, char *inputString)
+void addSeparatorsAndLines(sep_list **separatorListHead,
+		line_list **lineListHead, char *inputString)
 {
 	int i;
 	char *line;
@@ -95,12 +95,12 @@ void addSeparatorsAndLines(separatorList **separatorListHead,
  * @dataShell: data structure
  * Return: no return
  */
-void goToNext(separatorList **separatorList, lineList **lineList,
-		dataShell *dataShell)
+void goToNext(sep_list **separatorList, line_list **lineList,
+		data_shell *dataShell)
 {
 	int loopSeparator;
-	separatorList *listSeparator;
-	lineList *listLine;
+	sep_list *listSeparator;
+	line_list *listLine;
 
 	loopSeparator = 1;
 	listSeparator = *separatorList;
@@ -138,11 +138,11 @@ void goToNext(separatorList **separatorList, lineList **lineList,
  * @inputString: input string
  * Return: 0 to exit, 1 to continue
  */
-int splitCommands(dataShell *dataShell, char *inputString)
+int splitCommands(data_shell *dataShell, char *inputString)
 {
 
-	separatorList *separatorListHead, *listSeparator;
-	lineList *lineListHead, *listLine;
+	sep_list *separatorListHead, *listSeparator;
+	line_list *lineListHead, *listLine;
 	int loop;
 
 	separatorListHead = NULL;
@@ -157,7 +157,7 @@ int splitCommands(dataShell *dataShell, char *inputString)
 	{
 		dataShell->input = listLine->line;
 		dataShell->args = tokenizeString(dataShell->input);
-		loop = executeLine(dataShell);
+		loop = exec_line(dataShell);
 		free(dataShell->args);
 
 		if (loop == 0)
@@ -170,7 +170,7 @@ int splitCommands(dataShell *dataShell, char *inputString)
 	}
 
 	freeSeparatorList(&separatorListHead);
-	freeLineList(&lineListHead);
+	free_line_list(&lineListHead);
 
 	if (loop == 0)
 		return (0);
@@ -188,7 +188,7 @@ char **tokenizeString(char *inputString)
 	size_t bufferSize;
 	size_t i;
 	char **tokens;
-	char *token;
+	char **token;
 
 	bufferSize = TOK_BUFSIZE;
 	tokens = malloc(sizeof(char *) * (bufferSize));
@@ -198,7 +198,7 @@ char **tokenizeString(char *inputString)
 		exit(EXIT_FAILURE);
 	}
 
-	token = strtok(inputString, TOK_DELIM);
+	token = _strtok(inputString, TOK_DELIM);
 	tokens[0] = token;
 
 	for (i = 1; token != NULL; i++)
@@ -213,7 +213,7 @@ char **tokenizeString(char *inputString)
 				exit(EXIT_FAILURE);
 			}
 		}
-		token = strtok(NULL, TOK_DELIM);
+		token = _strtok(NULL, TOK_DELIM);
 		tokens[i] = token;
 	}
 
