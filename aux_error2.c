@@ -1,40 +1,40 @@
 #include "main.h"
 
-char *error_path_126(char **args);
+char *error_path_126(data_shell *datash);
 char *error_path_127(char **args);
 
 /**
  * error_path_126 - Creates an error message for permission denied failures.
- * @args: An array of arguments passed to the command.
+ * @datash: Data relevant to the shell.
  *
  * Return: The error string.
  */
-char *error_path_126(char **args)
+char *error_path_126(data_shell *datash)
 {
 	char *error, *hist_str;
 	int len;
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return (NULL);
+		return NULL;
 
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 24;
+	len = _strlen(name) + _strlen(hist_str) + _strlen(datash->args[0]) + 24;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(hist_str);
-		return (NULL);
+		return NULL;
 	}
 
 	_strcpy(error, name);
 	_strcat(error, ": ");
 	_strcat(error, hist_str);
 	_strcat(error, ": ");
-	_strcat(error, args[0]);
+	_strcat(error, datash->args[0]);
 	_strcat(error, ": Permission denied\n");
 
 	free(hist_str);
-	return (error);
+	return error;
 }
 
 /**
@@ -50,14 +50,14 @@ char *error_path_127(char **args)
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return (NULL);
+		return NULL;
 
 	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 16;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(hist_str);
-		return (NULL);
+		return NULL;
 	}
 
 	_strcpy(error, name);
@@ -68,5 +68,5 @@ char *error_path_127(char **args)
 	_strcat(error, ": not found\n");
 
 	free(hist_str);
-	return (error);
+	return error;
 }

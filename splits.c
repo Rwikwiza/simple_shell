@@ -1,7 +1,7 @@
 #include "main.h"
 
 int splitCommands(data_shell *dataShell, char *inputString);
-char **tokenizeString(char *inputString);
+char **tokenizeString(char *inputString, char *delimiters __attribute__((unused)));
 void goToNext(sep_list **separatorList,
 		line_list **lineList, data_shell *dataShell);
 void addSeparatorsAndLines(sep_list **separatorListHead,
@@ -79,11 +79,11 @@ void addSeparatorsAndLines(sep_list **separatorListHead,
 		}
 	}
 
-	line = tokenizeString(inputString, ";|&");
+	line = tokenizeString(inputString, ";|&")[0];
 	do {
 		line = swapChars(line, 1);
 		addLineNodeAtEnd(lineListHead, line);
-		line = tokenizeString(NULL, ";|&");
+		line = tokenizeString(NULL, ";|&")[0];
 	} while (line != NULL);
 }
 
@@ -156,7 +156,7 @@ int splitCommands(data_shell *dataShell, char *inputString)
 	while (listLine != NULL)
 	{
 		dataShell->input = listLine->line;
-		dataShell->args = tokenizeString(dataShell->input);
+		dataShell->args = tokenizeString(dataShell->input, ";|&");
 		loop = exec_line(dataShell);
 		free(dataShell->args);
 
@@ -170,7 +170,7 @@ int splitCommands(data_shell *dataShell, char *inputString)
 	}
 
 	freeSeparatorList(&separatorListHead);
-	free_line_list(&lineListHead);
+	free_line_list(lineListHead);
 
 	if (loop == 0)
 		return (0);
@@ -183,26 +183,29 @@ int splitCommands(data_shell *dataShell, char *inputString)
  * @inputString: input string.
  * Return: string splitted.
  */
-char **tokenizeString(char *inputString)
+
+char **tokenizeString(char *inputString, char *delimiters __attribute__((unused)))
 {
-	size_t bufferSize;
-	size_t i;
+	size_t bufferSize = TOK_BUFSIZE;
+	size_t i = 0;
 	char **tokens;
 	char **token;
-
-	bufferSize = TOK_BUFSIZE;
-	tokens = malloc(sizeof(char *) * (bufferSize));
+	
+	tokens = malloc(sizeof(char *) * bufferSize);
+	
 	if (tokens == NULL)
 	{
 		write(STDERR_FILENO, ": allocation error\n", 18);
 		exit(EXIT_FAILURE);
 	}
-
+	
 	token = _strtok(inputString, TOK_DELIM);
-	tokens[0] = token;
-
-	for (i = 1; token != NULL; i++)
+	
+	while (token != NULL)
 	{
+		tokens[i] = *token;
+		i++;
+		
 		if (i == bufferSize)
 		{
 			bufferSize += TOK_BUFSIZE;
@@ -213,9 +216,14 @@ char **tokenizeString(char *inputString)
 				exit(EXIT_FAILURE);
 			}
 		}
+		
 		token = _strtok(NULL, TOK_DELIM);
-		tokens[i] = token;
 	}
-
+	
+	tokens[i] = NULL; // Add NULL as the last element for proper termination
+	
 	return (tokens);
 }
+
+
+

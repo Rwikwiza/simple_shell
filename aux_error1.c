@@ -1,43 +1,45 @@
 #include "main.h"
 
-char *error_env(char **args);
+char *error_env(data_shell *datash, int ac);
 char *error_1(char **args);
 char *error_exit(char **args);
 char *error_cd(char **args);
 char *error_syntax(char **args);
+
 /**
  * error_env - Creates an error message for shellby_env errors.
- * @args: An array of arguments passed to the command.
+ * @datash: Data relevant to the shell.
+ * @ac: Argument count.
  *
  * Return: The error string.
  */
-char *error_env(char **args)
+char *error_env(data_shell *datash, int ac)
 {
 	char *error, *hist_str;
 	int len;
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return (NULL);
+		return NULL;
 
-	args--;
-	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 45;
+	ac--;
+	len = _strlen(name) + _strlen(hist_str) + _strlen(datash->args[ac]) + 45;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(hist_str);
-		return (NULL);
+		return NULL;
 	}
 
 	_strcpy(error, name);
 	_strcat(error, ": ");
 	_strcat(error, hist_str);
 	_strcat(error, ": ");
-	_strcat(error, args[0]);
+	_strcat(error, datash->args[ac]);
 	_strcat(error, ": Unable to add/remove from environment\n");
 
 	free(hist_str);
-	return (error);
+	return error;
 }
 
 /**

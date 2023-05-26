@@ -2,7 +2,11 @@
 
 int num_len(int num);
 char *_itoa(int num);
-int create_error(char **args, int err);
+char *error_env(data_shell *datash, int ac);
+char *error_1(char **args);
+char *error_exit(char **args);
+char *error_cd(char **args);
+char *error_syntax(char **args);
 
 /**
  * num_len - Counts the digit length of a number.
@@ -71,7 +75,6 @@ char *_itoa(int num)
 	return (buffer);
 }
 
-
 /**
  * create_error - Writes a custom error message to stderr.
  * @args: An array of arguments.
@@ -79,14 +82,14 @@ char *_itoa(int num)
  *
  * Return: The error value.
  */
-int create_error(char **args, int err)
+int create_error(char **args, int err, data_shell *datash)
 {
 	char *error;
 
 	switch (err)
 	{
 	case -1:
-		error = error_env(args);
+		error = error_env(NULL, 0); // Pass NULL and 0 as arguments for error_env
 		break;
 	case 1:
 		error = error_1(args);
@@ -100,7 +103,7 @@ int create_error(char **args, int err)
 			error = error_cd(args);
 		break;
 	case 126:
-		error = error_path_126(args);
+		error = error_path_126(datash);
 		break;
 	case 127:
 		error = error_path_127(args);
@@ -111,5 +114,4 @@ int create_error(char **args, int err)
 	if (error)
 		free(error);
 	return (err);
-
 }

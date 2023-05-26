@@ -24,7 +24,6 @@ char *copy_info(char *name, char *value)
 
 	return (new);
 }
-
 /**
  * set_env - sets an environment variable
  *
@@ -41,7 +40,7 @@ void set_env(char *name, char *value, data_shell *datash)
 	for (i = 0; datash->_environ[i]; i++)
 	{
 		var_env = _strdup(datash->_environ[i]);
-		name_env = _strtok(var_env, "=");
+		name_env = *_strtok(var_env, "="); /* Updated line */
 		if (_strcmp(name_env, name) == 0)
 		{
 			free(datash->_environ[i]);
@@ -77,9 +76,8 @@ int _setenv(data_shell *datash)
 
 	return (1);
 }
-
 /**
- * _unsetenv - deletes a environment variable
+ * _unsetenv - deletes an environment variable
  *
  * @datash: data relevant (env name)
  *
@@ -100,7 +98,7 @@ int _unsetenv(data_shell *datash)
 	for (i = 0; datash->_environ[i]; i++)
 	{
 		var_env = _strdup(datash->_environ[i]);
-		name_env = _strtok(var_env, "=");
+		name_env = *_strtok(var_env, "="); /* Updated line */
 		if (_strcmp(name_env, datash->args[1]) == 0)
 		{
 			k = i;

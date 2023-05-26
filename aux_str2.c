@@ -98,7 +98,7 @@ char *_strncat(char *dest, char *src, int n)
 }
 
 /**
- * _isdigit - checks if a number is between 0-9
+ * my_isdigit - checks if a number is between 0-9
  * @c: the number we are checking
  *
  * Return: returns 1 if c is between 0-9 else returns 0

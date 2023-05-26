@@ -63,6 +63,7 @@ typedef struct sep_list_s
 {
 	char *name;
 	char *value;
+	char separator;
 	struct sep_list_s *next;
 } sep_list;
 
@@ -75,6 +76,7 @@ typedef struct sep_list_s
 typedef struct line_list_s
 {
 	char *dir;
+	char *line;
 	struct line_list_s *next;
 } line_list;
 
@@ -131,7 +133,7 @@ char **_reallocdp(char **ptr, unsigned int old_size, unsigned int new_size);
 char *_strdup(const char *s);
 int _strlen(const char *s);
 char *_strncat(char *dest, char *src, int n);
-int _isdigit(int c);
+int _isdigit(int);
 void rev_string(char *s);
 
 /* aux_str3.c*/
@@ -159,6 +161,9 @@ void add_nodes(sep_list **head_s, line_list **head_l, char *input);
 void go_next(sep_list **list_s, line_list **list_l, data_shell *datash);
 int split_commands(data_shell *datash, char *input);
 char **split_line(char *input);
+void addSeparatorNodeAtEnd(sep_list **head, char separator);
+void addLineNodeAtEnd(line_list **head, char *line);
+void freeSeparatorList(sep_list **head);
 
 /* rep_var.c */
 void check_env(r_var **h, char *in, data_shell *data);
@@ -211,7 +216,7 @@ char *aux_itoa(int n);
 int _atoi(char *s);
 
 /* aux_error1.c */
-char *error_env(char **args);
+char *error_env(data_shell *datash, int ac);
 char *error_1(char **args);
 char *error_exit(char **args);
 char *error_cd(char **args);
@@ -219,18 +224,22 @@ char *error_syntax(char **args);
 
 
 /* aux_error2.c */
-char *error_path_126(char **args);
+char *error_path_126(data_shell *datash);
 char *error_path_127(char **args);
 
 
 /*aux_error3.c*/
 int num_len(int num);
 char *_itoa(int num);
-int create_error(char **args, int err);
+int create_error(char **args, int err, data_shell *datash);
 
 
 /* get_error.c */
 int get_error(data_shell *datash, int eval);
+char *error_not_found(data_shell *datash);
+char *error_exit_shell(data_shell *datash);
+char *error_get_cd(data_shell *datash);
+
 
 /* get_sigint.c */
 void get_sigint(int sig);
@@ -253,7 +262,7 @@ int get_help(data_shell *datash);
 
 /*splits.c*/
 int splitCommands(data_shell *data_shell, char *inputString);
-char **tokenizeString(char *inputString);
+char **tokenizeString(char *inputString, char *delimiters __attribute__((unused)));
 void goToNext(sep_list **separatorList, line_list **lineList,
 		data_shell *dataShell);
 void addSeparatorsAndLines(sep_list **separatorListHead,
