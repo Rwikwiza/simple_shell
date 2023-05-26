@@ -251,4 +251,13 @@ void aux_help_history(void);
 /* get_help.c */
 int get_help(data_shell *datash);
 
+/*splits.c*/
+int splitCommands(dataShell *dataShell, char *inputString);
+char **tokenizeString(char *inputString);
+void goToNext(separatorList **separatorList, lineList **lineList,
+		dataShell *dataShell);
+void addSeparatorsAndLines(separatorList **separatorListHead,
+		lineList **lineListHead, char *inputString);
+char *swapChars(char *inputString, int swapType);
+
 #endif
