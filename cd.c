@@ -8,9 +8,9 @@ void rev_string(char *str)
 {
     int i, len;
     char temp;
-
+    
     len = _strlen(str);
-
+    
     for (i = 0; i < len / 2; i++)
     {
         temp = str[i];
@@ -29,7 +29,7 @@ void cd_dot(data_shell *datash)
 {
     char pwd[PATH_MAX];
     char *dir, *cp_pwd, **cp_strtok_pwd;
-
+    
     getcwd(pwd, sizeof(pwd));
     cp_pwd = _strdup(pwd);
     set_env("OLDPWD", cp_pwd, datash);
