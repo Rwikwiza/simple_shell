@@ -26,12 +26,6 @@
 /* Points to an array of pointers to strings called the "environment" */
 extern char **environ;
 
-/* Global program name */
-char *name;
-
-/* Global history counter */
-int hist;
-
 /**
  * struct data - struct that contains all relevant data on runtime
  * @av: argument vector
@@ -57,6 +51,8 @@ typedef struct data
  * struct sep_list_s - single linked list
  * @separator: ; | &
  * @next: next node
+ * @name: name of the struct
+ * @value: Value of the variable
  * Description: single linked list to store separators
  */
 typedef struct sep_list_s
@@ -71,6 +67,7 @@ typedef struct sep_list_s
  * struct line_list_s - single linked list
  * @line: command line
  * @next: next node
+ * @dir: directory
  * Description: single linked list to store command lines
  */
 typedef struct line_list_s
@@ -262,7 +259,8 @@ int get_help(data_shell *datash);
 
 /*splits.c*/
 int splitCommands(data_shell *data_shell, char *inputString);
-char **tokenizeString(char *inputString, char *delimiters __attribute__((unused)));
+char **tokenizeString(char *inputString,
+		char *delimiters __attribute__((unused)));
 void goToNext(sep_list **separatorList, line_list **lineList,
 		data_shell *dataShell);
 void addSeparatorsAndLines(sep_list **separatorListHead,

@@ -31,9 +31,9 @@ int exit_shell(data_shell *datash)
 		{
 			get_error(datash, 2);
 			datash->status = 2;
-			return 1;
+			return (1);
 		}
 		datash->status = (ustatus % 256);
 	}
-	return 0;
+	return (0);
 }
