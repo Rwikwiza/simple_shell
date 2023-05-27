@@ -20,7 +20,7 @@ char *error_env(data_shell *datash, int ac)
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return NULL;
+		return (NULL);
 
 	ac--;
 	len = _strlen(name) + _strlen(hist_str) + _strlen(datash->args[ac]) + 45;
@@ -28,7 +28,7 @@ char *error_env(data_shell *datash, int ac)
 	if (!error)
 	{
 		free(hist_str);
-		return NULL;
+		return (NULL);
 	}
 
 	_strcpy(error, name);
@@ -39,7 +39,7 @@ char *error_env(data_shell *datash, int ac)
 	_strcat(error, ": Unable to add/remove from environment\n");
 
 	free(hist_str);
-	return error;
+	return (error);
 }
 
 /**

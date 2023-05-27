@@ -16,14 +16,14 @@ char *error_path_126(data_shell *datash)
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return NULL;
+		return (NULL);
 
 	len = _strlen(name) + _strlen(hist_str) + _strlen(datash->args[0]) + 24;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(hist_str);
-		return NULL;
+		return (NULL);
 	}
 
 	_strcpy(error, name);
@@ -34,7 +34,7 @@ char *error_path_126(data_shell *datash)
 	_strcat(error, ": Permission denied\n");
 
 	free(hist_str);
-	return error;
+	return (error);
 }
 
 /**
@@ -50,14 +50,14 @@ char *error_path_127(char **args)
 
 	hist_str = _itoa(hist);
 	if (!hist_str)
-		return NULL;
+		return (NULL);
 
 	len = _strlen(name) + _strlen(hist_str) + _strlen(args[0]) + 16;
 	error = malloc(sizeof(char) * (len + 1));
 	if (!error)
 	{
 		free(hist_str);
-		return NULL;
+		return (NULL);
 	}
 
 	_strcpy(error, name);
@@ -68,5 +68,5 @@ char *error_path_127(char **args)
 	_strcat(error, ": not found\n");
 
 	free(hist_str);
-	return error;
+	return (error);
 }

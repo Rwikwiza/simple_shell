@@ -79,6 +79,7 @@ char *_itoa(int num)
  * create_error - Writes a custom error message to stderr.
  * @args: An array of arguments.
  * @err: The error value.
+ * @datash: holds data
  *
  * Return: The error value.
  */
@@ -89,7 +90,7 @@ int create_error(char **args, int err, data_shell *datash)
 	switch (err)
 	{
 	case -1:
-		error = error_env(NULL, 0); // Pass NULL and 0 as arguments for error_env
+		error = error_env(NULL, 0);
 		break;
 	case 1:
 		error = error_1(args);
