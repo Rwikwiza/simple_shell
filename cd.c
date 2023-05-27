@@ -6,17 +6,17 @@
  */
 void rev_string(char *str)
 {
-	int i, len;
-	char temp;
-	
-	len = _strlen(str);
+    int i, len;
+    char temp;
 
-	for (i = 0; i < len / 2; i++)
-	{
-		temp = str[i];
-		str[i] = str[len - i - 1];
-		str[len - i - 1] = temp;
-	}
+    len = _strlen(str);
+
+    for (i = 0; i < len / 2; i++)
+    {
+        temp = str[i];
+        str[i] = str[len - i - 1];
+        str[len - i - 1] = temp;
+    }
 }
 /**
  * cd_dot - changes to the parent directory
@@ -27,13 +27,13 @@ void rev_string(char *str)
  */
 void cd_dot(data_shell *datash)
 {
-	char pwd[PATH_MAX];
-	char *dir, *cp_pwd, **cp_strtok_pwd;
-	
-	getcwd(pwd, sizeof(pwd));
-	cp_pwd = _strdup(pwd);
-	set_env("OLDPWD", cp_pwd, datash);
-	dir = datash->args[1];
+    char pwd[PATH_MAX];
+    char *dir, *cp_pwd, **cp_strtok_pwd;
+
+    getcwd(pwd, sizeof(pwd));
+    cp_pwd = _strdup(pwd);
+    set_env("OLDPWD", cp_pwd, datash);
+    dir = datash->args[1];
     if (_strcmp(".", dir) == 0)
     {
         set_env("PWD", cp_pwd, datash);
@@ -66,7 +66,6 @@ void cd_dot(data_shell *datash)
     datash->status = 0;
     free(cp_pwd);
 }
-
 
 /**
  * cd_to - changes to a directory given
