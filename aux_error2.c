@@ -2,6 +2,8 @@
 
 char *error_path_126(data_shell *datash);
 char *error_path_127(char **args);
+extern int hist;
+extern char *name;
 
 /**
  * error_path_126 - Creates an error message for permission denied failures.

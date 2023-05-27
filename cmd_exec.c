@@ -31,8 +31,8 @@ int is_cdir(char *path, int *i)
  */
 char *_which(char *cmd, char **_environ)
 {
-	char *path, *ptr_path, **token_path, *dir
-		int len_dir, len_cmd, i;
+	char *path, *ptr_path, **token_path, 
+    *dir; int len_dir, len_cmd, i;
 	struct stat st;
 
 	path = _getenv("PATH", _environ);

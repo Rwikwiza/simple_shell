@@ -5,6 +5,8 @@ char *error_1(char **args);
 char *error_exit(char **args);
 char *error_cd(char **args);
 char *error_syntax(char **args);
+extern int hist;
+extern char *name;
 
 /**
  * error_env - Creates an error message for shellby_env errors.
